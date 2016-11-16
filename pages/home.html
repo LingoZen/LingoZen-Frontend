@@ -1,0 +1,22 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <center>
+        <div class="container">
+            <h1>Welcome to Lingo Zen!</h1>
+            <div class="form-group">
+				<span ng-if="!loggedin">
+					<h2>Please Sign in or Sign up</h2>
+					</span>
+                <span ng-if="loggedin">
+					<input type="text" class="form-control" placeholder="Search for senteces...">
+					<span class=form-group>
+					<button class="btn btn-default" type="button">Search!</button>
+					</span>
+                </span>
+            </div>
+        </div>
+    </center>
+</div>
+<footer>
+    <p>&copy; LingoZen 2016</p>
+</footer>
