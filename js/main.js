@@ -1,5 +1,5 @@
 //create module
-<<<<<<< HEAD
+
 var lingoApp = angular.module('lingoApp', ['ngRoute', 'ngResource']);
 
 lingoApp.constant("constants", {
