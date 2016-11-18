@@ -45,9 +45,9 @@ lingoApp.config(['$resourceProvider', function ($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = false;
 }]);
 
-lingoApp.config('sentenceCtrl'), function($rootScope, $scope, $resource, constants){
+/*lingoApp.config('sentenceCtrl'), function(){
 
-}
+}*/
 
 lingoApp.controller('signupCtrl', function ($scope, $resource, constants) {
     var fuckYou = $resource("", [], {
