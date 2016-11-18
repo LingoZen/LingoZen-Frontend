@@ -1,22 +1,51 @@
+body {
+    padding-top: 0;
+}
 
+.users-name-in-top-nav-bar {
+    color: white;
+    padding-right: 12px;
+    align-self: center;
+}
 
-/* ==========================================================================
-   Author's custom styles
-   ========================================================================== */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+}
 
+.welcome-message{
+    padding-bottom: 8px ;
+}
 
+.header-bar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-color: #080808;
+    background-image: linear-gradient(to bottom, #3c3c3c 0, #222 100%);
+    padding: 0 16px;
+}
 
+.navbar-brand {
+    color: #9d9d9d;
+}
 
+.navbar-brand:hover {
+    color: #fff;
+    background-color: transparent;
+}
 
+.user-name-and-log-out-button-container {
+    display: flex;
+    align-self: center;
+}
 
+.login-form-logout-container {
+    display: flex;
+}
 
-
-
-
-
-
-
-
-
-
-
+.search-bar-button-container{
+    display: flex;
+    flex: 1 1 100%
+}

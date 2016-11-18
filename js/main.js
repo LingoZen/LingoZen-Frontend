@@ -1,9 +1,9 @@
 //create module
 
-var lingoApp = angular.module('lingoApp', ['ngRoute', 'ngResource']);
+var lingoApp = angular.module('lingoApp', ['ngRoute', 'ngResource', 'angular-jwt']);
 
 lingoApp.constant("constants", {
-    "apiXyz": "http://54.175.240.69:3000/"
+    "backendApiUrl": "http://54.175.240.69:3000/"
 });
 
 //routes
@@ -27,8 +27,8 @@ lingoApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'pages/user.html',
             controller: 'userCtrl'
         })
-        .when('/sentenceS', {
-            templateUrl: 'pages/sentenceS.html',
+        .when('/sentences', {
+            templateUrl: 'pages/sentences.html',
             controller: 'sentenceSCtrl'
         })
         .when('/sentence', {
@@ -45,25 +45,23 @@ lingoApp.config(['$resourceProvider', function ($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = false;
 }]);
 
-/*lingoApp.config('sentenceCtrl'), function(){
-
-}*/
-
 lingoApp.controller('signupCtrl', function ($scope, $resource, constants) {
-    var fuckYou = $resource("", [], {
+    var resource = $resource("", [], {
         signup: {
             method: 'POST',
-            url: constants.apiXyz + 'users',
+            url: constants.backendApiUrl + 'users',
             isarray: true
 
         }
     }, {});
 
     $scope.something = {};
+    $scope.search = {
+
+    };
 
     $scope.signup = function () {
-        fuckYou.signup($scope.something).$promise.then(function (res) {
-            console.log('we got ', res[0]);
+        resource.signup($scope.something).$promise.then(function (res) {
         }).catch(function (err) {
             console.error(err);
         });
@@ -73,27 +71,57 @@ lingoApp.controller('signupCtrl', function ($scope, $resource, constants) {
 lingoApp.controller('homeCtrl', function ($scope, $resource, constants) {
 });
 
-lingoApp.controller('mainController', function ($rootScope, $scope, $resource, constants) {
-    var fuckMe = $resource("",[], {
-        signin: {
+lingoApp.controller('mainController', function ($rootScope, $scope, $resource, constants, jwtHelper) {
+    function onInit() {
+        var jwt = getJwtFromLocaStorage();
+        if (jwt && jwt.length) {
+            var user = jwtHelper.decodeToken(jwt);
+            logUserInWithJwt(user, jwt);
+        }
+    }
+    onInit();
+
+    var resources = $resource("", [], {
+        signIn: {
             method: 'POST',
-            url: constants.apiXyz + 'users/login',
+            url: constants.backendApiUrl + 'users/login',
             isarray: true
         }
     }, {});
 
-    $scope.login={};
+    $scope.login = {};
 
-    $scope.signin = function() {
-        console.log("fuckme")
-        fuckMe.signin($scope.login).$promise.then(function (res) {
-            $rootScope.jwt = res.jwt
-            console.log(res.jwt);
-            $rootScope.loggedin = true
-            $rootScope.user = res;
-            console.log('we got ', res);
+    $scope.signIn = function () {
+        resources.signIn($scope.login).$promise.then(function (res) {
+            logUserInWithJwt(res, res.jwt);
         }).catch(function (err) {
             console.error(err);
         });
+    };
+
+    $scope.logOut = function () {
+        logUserOutAndClearJwt();
+    };
+
+    function getJwtFromLocaStorage() {
+        return localStorage.getItem('lingoZenJwt');
+    }
+
+    function setJwtInLocalStorage(jwt) {
+        localStorage.setItem('lingoZenJwt', jwt);
+    }
+
+    function logUserInWithJwt(user, jwt) {
+        $rootScope.jwt = jwt;
+        $rootScope.loggedIn = true;
+        $rootScope.user = user;
+        setJwtInLocalStorage(jwt)
+    }
+
+    function logUserOutAndClearJwt() {
+        $rootScope.jwt = null;
+        $rootScope.loggedIn = false;
+        $rootScope.user = null;
+        localStorage.removeItem('lingoZenJwt');
     }
 });

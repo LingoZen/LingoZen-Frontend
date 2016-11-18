@@ -2,22 +2,30 @@
 <div class="jumbotron">
     <center>
         <div class="container">
-            <h1>Welcome to Lingo Zen!</h1>
+            <h1 class="welcome-message">Welcome to Lingo Zen!</h1>
+
             <div class="form-group">
-				<span ng-if="!loggedin">
-					<h2>Please Sign in or Sign up</h2>
-					</span>
-                <span ng-if="loggedin">
-					<input type="text" class="form-control" placeholder="Search for senteces...">
-					<span class=form-group>
-					<button class="btn btn-default" type="button">Search!</button>
-					</span>
-                    <br>
-                    <div>
-                        <p>first</p>
-                        <output>stuff</output>
+                <div ng-if="!loggedIn">
+                    <h2>Please Sign in or <a href="#/signup">Sign up</a></h2>
+                </div>
+
+                <div ng-if="loggedIn" class="search-bar-button-container">
+                    <input ng-model="search.query" type="text" class="form-control" placeholder="Search for senteces...">
+                    <button class="btn btn-default" type="button" ng-click="search()">Search!</button>
+                </div>
+
+                <div ng-if="searchResults">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4><i class="fa fa-fw fa-check"></i>Language Here</h4>
+                            </div>
+                            <div class="panel-body">
+                                <p>Sentenves go here</p>
+                            </div>
+                        </div>
                     </div>
-                </span>
+                </div>
             </div>
         </div>
     </center>
