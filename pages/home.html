@@ -10,31 +10,29 @@
                 </div>
 
                 <div ng-if="loggedIn" class="search-bar-button-container">
-                    <input ng-model="searchQuery.query" type="text" class="form-control" placeholder="Search for senteces...">
+                    <input ng-model="searchQuery.query" type="text" class="form-control"
+                           placeholder="Search for senteces...">
                     <button class="btn btn-default" type="button" ng-click="search()">Search!</button>
                 </div>
-               <!-- searchResults-->
+                <!-- searchResults-->
                 <div ng-if="loggedIn">
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                         <div class="panel panel-info" ng-repeat="languages in language">
                             <div class="panel-heading">
                                 <h4>{{languages}}</h4>
                             </div>
                             <div class="panel-body">
                                 <p ng-repeat="sentence in sentences[languages]">
-                                    {{sentence.likes}}
-                                    <a class="btn btn-default" > <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                                    <a class="btn btn-default"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                                    {{sentence.text}}</p>
-                                <button class="btn btn-default" type="button" ng-click="sentenceCtrl()">Sentence!</button>
+                                    {{sentence.likes - sentence.dislikes}}
+                                    <a class="btn btn-default"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+                                    <a class="btn btn-default"><i class="fa fa-thumbs-o-down"
+                                                                  aria-hidden="true"></i></a>
+                                    <a ng-href="#/sentences/{{sentence.id}}">{{sentence.text}}</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+    </center>
 </div>
-<footer>
-    <p>&copy; LingoZen 2016</p>
-</footer>

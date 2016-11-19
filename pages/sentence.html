@@ -1,10 +1,48 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
-        <div class="container">
-            <h1 class="welcome-message">Sentence Page!</h1>
-
+    <div class="sentence-container container">
+        <div>
+            <div class="panel panel-info">
+                <div class="panel-body">
+                    {{sentence.likes - sentence.dislikes}}
+                    <a class="btn btn-default">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                    </a>
+                    <a class="btn btn-default">
+                        <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                    </a>
+                    {{sentence.text}}
+                </div>
+            </div>
         </div>
+        <span style="padding-top: 24px;">Translations</span>
+        <div class="panel panel-info" ng-repeat="translation in sentence.translations">
+            <div class="panel-body">
+                {{translation.likes - translation.dislikes}}
+                <a class="btn btn-default">
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-default">
+                    <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                </a>
+                {{translation.text}}
+            </div>
+        </div>
+        <span ng-if="!sentence.translations.length">No Translations found for this</span>
+        <span style="padding-top: 24px;">Comments</span>
+        <div class="panel panel-info" ng-repeat="comment in sentence.comments">
+            <div class="panel-body">
+                {{comment.likes - comment.dislikes}}
+                <a class="btn btn-default">
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-default">
+                    <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+                </a>
+                {{comment.description}}
+            </div>
+        </div>
+        <span ng-if="!sentence.comments.length">No Comments found for this</span>
+
+    </div>
 </div>
-<footer>
-    <p>&copy; LingoZen 2016</p>
-</footer>

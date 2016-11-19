@@ -10,7 +10,7 @@ lingoApp.constant("constants", {
 lingoApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
 
-        //home route
+    //home route
         .when('/', {
             templateUrl: 'pages/home.html',
             controller: 'homeCtrl'
@@ -23,15 +23,13 @@ lingoApp.config(['$routeProvider', function ($routeProvider) {
         })
 
         //user page
-        .when('/user', {
+        .when('/user-profile', {
             templateUrl: 'pages/user.html',
-            controller: 'userCtrl'
+            controller: 'userProfileCtrl'
         })
-        .when('/sentences', {
-            templateUrl: 'pages/sentences.html',
-            controller: 'sentenceSCtrl'
-        })
-        .when('/sentence', {
+
+        //sentence page
+        .when('/sentences/:id', {
             templateUrl: 'pages/sentence.html',
             controller: 'sentenceCtrl'
         })
@@ -66,14 +64,31 @@ lingoApp.controller('signupCtrl', function ($scope, $resource, constants) {
     }
 });
 
-lingoApp.controller('sentenceCtrl', function(){
+lingoApp.controller('sentenceCtrl', function ($scope, $resource, constants, $routeParams) {
+    var resources = $resource("", [], {
+        getSentence: {
+            method: 'GET',
+            url: constants.backendApiUrl + 'sentences/:id'
+        }
+    }, {});
 
+    $scope.sentence = {};
+    function onInit() {
+        resources.getSentence({id: $routeParams.id}).$promise.then(function (sentence) {
+            $scope.sentence = sentence;
+        }).catch(function (err) {
+            console.error(err);
+        })
+    }
+
+    onInit();
 });
 
-
-
-
 lingoApp.controller('homeCtrl', function ($scope, $resource, constants) {
+});
+
+lingoApp.controller('userProfileCtrl', function ($scope, $resource, constants) {
+
 });
 
 lingoApp.controller('mainController', function ($rootScope, $scope, $resource, constants, jwtHelper) {
@@ -92,11 +107,10 @@ lingoApp.controller('mainController', function ($rootScope, $scope, $resource, c
             method: 'POST',
             url: constants.backendApiUrl + 'users/login',
             isarray: true
-        }
-        , sentences: {
+        },
+        sentences: {
             method: 'GET',
             url: constants.backendApiUrl + 'sentences'
-
         }
     }, {});
 

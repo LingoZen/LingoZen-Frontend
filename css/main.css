@@ -1,5 +1,30 @@
+html {
+    height: 100%;
+}
+
 body {
     padding-top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sentence-container {
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+}
+
+.jumbotron,
+.jumbotron center {
+    display: flex;
+    flex: 1 1;
+}
+
+[ng-view] {
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .users-name-in-top-nav-bar {
@@ -14,8 +39,8 @@ body {
     padding: 0;
 }
 
-.welcome-message{
-    padding-bottom: 8px ;
+.welcome-message {
+    padding-bottom: 8px;
 }
 
 .header-bar {
@@ -29,6 +54,10 @@ body {
 
 .navbar-brand {
     color: #9d9d9d;
+}
+
+a.navbar-brand:focus {
+    color: inherit;
 }
 
 .navbar-brand:hover {
@@ -45,10 +74,11 @@ body {
     display: flex;
 }
 
-.search-bar-button-container{
+.search-bar-button-container {
     display: flex;
     flex: 1 1 100%
 }
-.panel-body{
+
+.panel-body {
 
 }

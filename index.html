@@ -38,7 +38,7 @@
 <!--top nav bar-->
 <div class="header-bar">
     <div class="logo-container">
-        <a class="navbar-brand" href="#">Ling&#x262f;Zen</a>
+        <a class="navbar-brand" href="#/">Ling&#x262f;Zen</a>
     </div>
     <div class="login-form-logout-container">
         <form class="navbar-form navbar-right" role="form" ng-if="!loggedIn">
@@ -51,13 +51,21 @@
             <button type="submit" class="btn btn-success" ng-click="signIn()">Sign in</button>
         </form>
         <div class="user-name-and-log-out-button-container">
-            <span class="users-name-in-top-nav-bar" ng-if="loggedIn">{{user.username}} </span>
+            <a class="users-name-in-top-nav-bar" ng-if="loggedIn" ng-href="#/user-profile">{{user.username}} </a>
             <button class="btn btn-success" ng-click="logOut()" ng-if="loggedIn">Log out</button>
         </div>
     </div>
 </div>
-<!--en top nav bar-->
+<!--end top nav bar-->
+
 <div ng-view=""></div>
+
+<!--footer-->
+<footer>
+    <p>&copy; LingoZen 2016</p>
+</footer>
+<!--end footer-->
+
 <!-- /container -->
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
 
