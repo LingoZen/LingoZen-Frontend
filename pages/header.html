@@ -1,0 +1,20 @@
+<header class="header-bar">
+    <div class="logo-container">
+        <a class="navbar-brand" href="#/">Ling&#x262f;Zen</a>
+    </div>
+    <div class="login-form-logout-container">
+        <form class="navbar-form navbar-right" role="form" ng-if="!loggedIn">
+            <div class="form-group">
+                <input type="text" placeholder="Email" class="form-control" ng-model="login.username">
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" class="form-control" ng-model="login.password">
+            </div>
+            <button type="submit" class="btn btn-success" ng-click="signIn()">Sign in</button>
+        </form>
+        <div class="user-name-and-log-out-button-container">
+            <a class="users-name-in-top-nav-bar" ng-if="loggedIn" ng-href="#/user-profile">{{user.username}} </a>
+            <button class="btn btn-success" ng-click="logOut()" ng-if="loggedIn">Log out</button>
+        </div>
+    </div>
+</header>

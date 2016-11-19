@@ -1,38 +1,35 @@
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-    <center>
-        <div class="container">
-            <h1 class="welcome-message">Welcome to Lingo Zen!</h1>
+<center>
+    <div class="container">
+        <h1 class="welcome-message">Welcome to Lingo Zen!</h1>
 
-            <div class="form-group">
-                <div ng-if="!loggedIn">
-                    <h2>Please Sign in or <a href="#/signup">Sign up</a></h2>
-                </div>
+        <div class="form-group">
+            <div ng-if="!loggedIn">
+                <h2>Please Sign in or <a href="#/signup">Sign up</a></h2>
+            </div>
 
-                <div ng-if="loggedIn" class="search-bar-button-container">
-                    <input ng-model="searchQuery.query" type="text" class="form-control"
-                           placeholder="Search for senteces...">
-                    <button class="btn btn-default" type="button" ng-click="search()">Search!</button>
-                </div>
-                <!-- searchResults-->
-                <div ng-if="loggedIn">
-                    <div class="col-md-12">
-                        <div class="panel panel-info" ng-repeat="languages in language">
-                            <div class="panel-heading">
-                                <h4>{{languages}}</h4>
-                            </div>
-                            <div class="panel-body">
-                                <p ng-repeat="sentence in sentences[languages]">
-                                    {{sentence.likes - sentence.dislikes}}
-                                    <a class="btn btn-default"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                                    <a class="btn btn-default"><i class="fa fa-thumbs-o-down"
-                                                                  aria-hidden="true"></i></a>
-                                    <a ng-href="#/sentences/{{sentence.id}}">{{sentence.text}}</a></p>
-                            </div>
+            <div ng-if="loggedIn" class="search-bar-button-container">
+                <input ng-model="searchQuery.query" type="text" class="form-control"
+                       placeholder="Search for senteces...">
+                <button class="btn btn-default" type="button" ng-click="search()">Search!</button>
+            </div>
+            <!-- searchResults-->
+            <div ng-if="loggedIn">
+                <div class="col-md-12">
+                    <div class="panel panel-info" ng-repeat="languages in language">
+                        <div class="panel-heading">
+                            <h4>{{languages}}</h4>
+                        </div>
+                        <div class="panel-body">
+                            <p ng-repeat="sentence in sentences[languages]">
+                                {{sentence.likes - sentence.dislikes}}
+                                <a class="btn btn-default"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+                                <a class="btn btn-default"><i class="fa fa-thumbs-o-down"
+                                                              aria-hidden="true"></i></a>
+                                <a ng-href="#/sentences/{{sentence.id}}">{{sentence.text}}</a></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </center>
-</div>
+    </div>
+</center>
