@@ -10,25 +10,25 @@
                 </div>
 
                 <div ng-if="loggedIn" class="search-bar-button-container">
-                    <input ng-model="search.query" type="text" class="form-control" placeholder="Search for senteces...">
+                    <input ng-model="searchQuery.query" type="text" class="form-control" placeholder="Search for senteces...">
                     <button class="btn btn-default" type="button" ng-click="search()">Search!</button>
                 </div>
-
-                <div ng-if="searchResults">
+               <!-- searchResults-->
+                <div ng-if="loggedIn">
                     <div class="col-md-4">
-                        <div class="panel panel-default">
+                        <div class="panel panel-info">
                             <div class="panel-heading">
-                                <h4><i class="fa fa-fw fa-check"></i>Language Here</h4>
+                                <h4><i class="fa fa-fw fa-check"></i>{{language[0]}}</h4>
                             </div>
-                            <div class="panel-body">
-                                <p>Sentenves go here</p>
+                            <div class="panel-body ">
+                                <p ng-repeat="sentence in sentences[language[0]]">{{sentence.text}}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </center>
+
 </div>
 <footer>
     <p>&copy; LingoZen 2016</p>

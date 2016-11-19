@@ -56,9 +56,7 @@ lingoApp.controller('signupCtrl', function ($scope, $resource, constants) {
     }, {});
 
     $scope.something = {};
-    $scope.search = {
 
-    };
 
     $scope.signup = function () {
         resource.signup($scope.something).$promise.then(function (res) {
@@ -79,6 +77,7 @@ lingoApp.controller('mainController', function ($rootScope, $scope, $resource, c
             logUserInWithJwt(user, jwt);
         }
     }
+
     onInit();
 
     var resources = $resource("", [], {
@@ -86,6 +85,11 @@ lingoApp.controller('mainController', function ($rootScope, $scope, $resource, c
             method: 'POST',
             url: constants.backendApiUrl + 'users/login',
             isarray: true
+        }
+        , sentences: {
+            method: 'GET',
+            url: constants.backendApiUrl + 'sentences'
+
         }
     }, {});
 
@@ -124,4 +128,25 @@ lingoApp.controller('mainController', function ($rootScope, $scope, $resource, c
         $rootScope.user = null;
         localStorage.removeItem('lingoZenJwt');
     }
+
+    $scope.searchQuery = {};
+    $scope.language = null;
+    $scope.sentences = null;
+
+    $scope.search = function () {
+        resources.sentences({search: $scope.searchQuery.query}).$promise.then(function (res) {
+            /* resources.sentences({search: "life"}).$promise.then(function (res){*/
+            $scope.language = Object.keys(res).map(function (lang) {
+                return lang !== '$promise' && lang !== '$resolved' && lang;
+            }).filter(function (a) {
+                return a;
+            });
+
+            $scope.sentences = res
+        }).catch(function (err) {
+            console.error(err);
+        });
+    }
+
+
 });
