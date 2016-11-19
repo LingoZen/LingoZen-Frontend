@@ -16,12 +16,17 @@
                <!-- searchResults-->
                 <div ng-if="loggedIn">
                     <div class="col-md-4">
-                        <div class="panel panel-info">
+                        <div class="panel panel-info" ng-repeat="languages in language">
                             <div class="panel-heading">
-                                <h4><i class="fa fa-fw fa-check"></i>{{language[0]}}</h4>
+                                <h4>{{languages}}</h4>
                             </div>
-                            <div class="panel-body ">
-                                <p ng-repeat="sentence in sentences[language[0]]">{{sentence.text}}</p>
+                            <div class="panel-body">
+                                <p ng-repeat="sentence in sentences[languages]">
+                                    {{sentence.likes}}
+                                    <a class="btn btn-default" > <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
+                                    <a class="btn btn-default"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
+                                    {{sentence.text}}</p>
+                                <button class="btn btn-default" type="button" ng-click="sentenceCtrl()">Sentence!</button>
                             </div>
                         </div>
                     </div>

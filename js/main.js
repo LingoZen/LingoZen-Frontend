@@ -66,6 +66,13 @@ lingoApp.controller('signupCtrl', function ($scope, $resource, constants) {
     }
 });
 
+lingoApp.controller('sentenceCtrl', function(){
+
+});
+
+
+
+
 lingoApp.controller('homeCtrl', function ($scope, $resource, constants) {
 });
 
