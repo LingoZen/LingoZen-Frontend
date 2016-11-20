@@ -3,8 +3,8 @@
 var lingoApp = angular.module('lingoApp', ['ngRoute', 'ngResource', 'angular-jwt']);
 
 lingoApp.constant("constants", {
-    // "backendApiUrl": "http://54.175.240.69:3000/"
-    "backendApiUrl": "http://localhost:3000/"
+    "backendApiUrl": "http://54.175.240.69:3000/"
+    // "backendApiUrl": "http://localhost:3000/"
 });
 
 //routes
