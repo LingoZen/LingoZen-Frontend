@@ -3,7 +3,8 @@
 var lingoApp = angular.module('lingoApp', ['ngRoute', 'ngResource', 'angular-jwt']);
 
 lingoApp.constant("constants", {
-    "backendApiUrl": "http://54.175.240.69:3000/"
+    // "backendApiUrl": "http://54.175.240.69:3000/"
+    "backendApiUrl": "http://localhost:3000/"
 });
 
 //routes
@@ -43,7 +44,7 @@ lingoApp.config(['$resourceProvider', function ($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = false;
 }]);
 
-lingoApp.controller('signupCtrl', function ($scope, $resource, constants) {
+lingoApp.controller('signupCtrl', function ($scope, $resource, constants, $location, $rootScope) {
     var resource = $resource("", [], {
         signup: {
             method: 'POST',
@@ -58,9 +59,20 @@ lingoApp.controller('signupCtrl', function ($scope, $resource, constants) {
 
     $scope.signup = function () {
         resource.signup($scope.something).$promise.then(function (res) {
+            $location.url('/');
+
+            $rootScope.jwt = res.jwt;
+            $rootScope.loggedIn = true;
+            $rootScope.user = res;
+
+            setJwtInLocalStorage(res.jwt);
         }).catch(function (err) {
             console.error(err);
         });
+    };
+
+    function setJwtInLocalStorage(jwt) {
+        localStorage.setItem('lingoZenJwt', jwt);
     }
 });
 
@@ -151,13 +163,12 @@ lingoApp.controller('mainController', function ($rootScope, $scope, $resource, c
     }
 
     $scope.searchQuery = {};
-    $scope.language = null;
+    $scope.languages = null;
     $scope.sentences = null;
 
     $scope.search = function () {
         resources.sentences({search: $scope.searchQuery.query}).$promise.then(function (res) {
-            /* resources.sentences({search: "life"}).$promise.then(function (res){*/
-            $scope.language = Object.keys(res).map(function (lang) {
+            $scope.languages = Object.keys(res).map(function (lang) {
                 return lang !== '$promise' && lang !== '$resolved' && lang;
             }).filter(function (a) {
                 return a;

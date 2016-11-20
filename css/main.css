@@ -9,6 +9,14 @@ body {
     flex-direction: column;
 }
 
+.home-page {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    align-items: center;
+}
+
 .sentence-container {
     display: flex;
     flex: 1 1;
