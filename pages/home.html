@@ -15,10 +15,10 @@
         <div class="col-md-12">
             <div class="panel panel-info" ng-repeat="language in languages">
                 <div class="panel-heading">
-                    <h4>{{languages}}</h4>
+                    <h4>{{language}}</h4>
                 </div>
                 <div class="panel-body">
-                    <p ng-repeat="sentence in sentences[languages]">
+                    <p ng-repeat="sentence in sentences[language]">
                         {{sentence.likes - sentence.dislikes}}
                         <a class="btn btn-default"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
                         <a class="btn btn-default"><i class="fa fa-thumbs-o-down"
