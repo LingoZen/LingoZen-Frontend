@@ -8,6 +8,10 @@ angular.module('lingoApp')
             searchSentences: {
                 method: 'GET',
                 url: constants.backendApiUrl + 'sentences'
+            },
+            addCommentToSentence: {
+                method: 'POST',
+                url: constants.backendApiUrl + 'comments/sentences/:id'
             }
         }, {});
 
@@ -18,6 +22,10 @@ angular.module('lingoApp')
         this.getById = function (id) {
             return resources.getById({id: id}).$promise;
         };
+
+        this.addCommentToSentence = function (sentenceId, comment){
+            return resources.addCommentToSentence({id: sentenceId}, comment).$promise;
+        }
     })
 
     .service('loginService', function ($resource, constants) {

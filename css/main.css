@@ -100,10 +100,15 @@ a.navbar-brand:focus {
     font-size: 24px;
 }
 
-.search-results:not(:last-of-type) {
-    padding-bottom: 16px;
+[uib-accordion-group].search-results .panel-body:not(.sentence-in-search-result) {
+    padding: 0;
 }
 
 .search-results .panel {
     margin-bottom: 0;
+}
+
+/*override*/
+.panel-group .panel + .panel {
+    margin-top: 24px;
 }
