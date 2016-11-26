@@ -31,13 +31,44 @@ angular.module('lingoApp')
         });
     })
 
-    .controller('homeCtrl', function ($scope, $resource, constants) {
+    .controller('homeCtrl', function ($scope, sentenceService) {
+        $scope.searchQuery = {};
+        $scope.searchResultLanguages = [];
+        $scope.searchResultSentences = {};
+
+        $scope.lastSearchedQuery = null;
+        $scope.$watchCollection('searchQuery', function (newValue) {
+            if ($scope.searchQuery.query !== $scope.lastSearchedQuery) {
+                search($scope.searchQuery.query);
+                $scope.lastSearchedQuery = $scope.searchQuery.query;
+            }
+        });
+
+        function search(searchQuery) {
+            sentenceService.searchSentences($scope.searchQuery.query).then(function (res) {
+                $scope.searchResultLanguages = Object.keys(res).map(function (lang) {
+                    return lang !== '$promise' && lang !== '$resolved' && lang;
+                }).filter(function (a) {
+                    return a;
+                });
+
+                $scope.searchResultSentences = res
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
     })
 
-    .controller('userProfileCtrl', function ($scope, $resource, constants) {
+    .controller('userProfileCtrl', function ($scope) {
     })
 
-    .controller('mainController', function ($rootScope, $scope, loginService, sentenceService, jwtHelper) {
+    .controller('mainController', function ($rootScope, $scope, $location, jwtHelper, loginService) {
+        $scope.goTo = function (url) {
+            $location.url(url);
+        };
+
+        $scope.thisYear = new Date().getFullYear();
+
         var jwt = getJwtFromLocaStorage();
         if (jwt && jwt.length) {
             var user = jwtHelper.decodeToken(jwt);
@@ -78,23 +109,5 @@ angular.module('lingoApp')
             $rootScope.loggedIn = false;
             $rootScope.user = null;
             localStorage.removeItem('lingoZenJwt');
-        }
-
-        $scope.searchQuery = {};
-        $scope.languages = null;
-        $scope.sentences = null;
-
-        $scope.search = function () {
-            sentenceService.searchSentences($scope.searchQuery.query).then(function (res) {
-                $scope.languages = Object.keys(res).map(function (lang) {
-                    return lang !== '$promise' && lang !== '$resolved' && lang;
-                }).filter(function (a) {
-                    return a;
-                });
-
-                $scope.sentences = res
-            }).catch(function (err) {
-                console.error(err);
-            });
         }
     });

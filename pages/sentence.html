@@ -1,18 +1,20 @@
 <div class="sentence-container container">
-    <div class="panel panel-info">
+    <div class="panel panel-info col-xs-12">
         <div class="panel-body">
-            {{sentence.likes - sentence.dislikes}}
-            <a class="btn btn-default">
-                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-            </a>
-            <a class="btn btn-default">
-                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-            </a>
-            {{sentence.text}}
+            <span class="col-xs-12"> {{sentence.text}}</span>
+            <div class="sentence-actions col-lg-12">
+                <a class="sentence-action col-lg-2" ng-click="likeSentence()">Like</a>
+                <a class="sentence-action col-lg-2" ng-click="dislikeSentence()">Dislike</a>
+                <a class="sentence-action col-lg-2" ng-click="addTranslationToSentence()">Translate</a>
+                <a class="sentence-action col-lg-2" ng-click="addCommentToSentence()">Comment</a>
+                <a class="sentence-action col-lg-2" ng-click="addSentenceToDeck()">Add to Deck</a>
+                <a class="sentence-action col-lg-2" ng-click="flagSentence()">Flag</a>
+
+            </div>
         </div>
     </div>
-    <span style="padding-top: 24px;">Translations</span>
-    <div class="panel panel-info" ng-repeat="translation in sentence.translations">
+    <span class="col-xs-12" style="padding-top: 24px;">Translations</span>
+    <div class="panel panel-info col-xs-12" ng-repeat="translation in sentence.translations">
         <div class="panel-body">
             {{translation.likes - translation.dislikes}}
             <a class="btn btn-default">
@@ -24,9 +26,9 @@
             {{translation.text}}
         </div>
     </div>
-    <span ng-if="!sentence.translations.length">No Translations found for this</span>
-    <span style="padding-top: 24px;">Comments</span>
-    <div class="panel panel-info" ng-repeat="comment in sentence.comments">
+    <span class="col-xs-12" ng-if="!sentence.translations.length">No Translations found for this</span>
+    <span class="col-xs-12" style="padding-top: 24px;">Comments</span>
+    <div class="panel panel-info col-xs-12" ng-repeat="comment in sentence.comments">
         <div class="panel-body">
             {{comment.likes - comment.dislikes}}
             <a class="btn btn-default">
@@ -38,5 +40,5 @@
             {{comment.description}}
         </div>
     </div>
-    <span ng-if="!sentence.comments.length">No Comments found for this</span>
+    <span ng-if="!sentence.comments.length" class="col-xs-12">No Comments found for this</span>
 </div>

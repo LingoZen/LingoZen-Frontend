@@ -1,31 +1,12 @@
-<div class="container home-page">
-    <h1 class="welcome-message">Welcome to LingoZen!</h1>
-    <h2 ng-if="!loggedIn">Please Sign in or <a href="#/signup">Sign up</a></h2>
+<div class="home-page">
+    <span class="welcome-message col-xs-12">Welcome to LingoZen!</span>
 
-    <div class="form-group col-md-12" ng-if="loggedIn">
-        <div class="search-bar-button-container">
-            <input ng-model="searchQuery.query" type="text" class="form-control"
-                   placeholder="Search for senteces...">
-            <button class="btn btn-default" type="button" ng-click="search()">Search!</button>
-        </div>
+
+    <div class="search-bar-button-container">
+        <input ng-model="searchQuery.query" type="text" class="form-control"
+               placeholder="Type here to start searching">
     </div>
 
     <!-- searchResults-->
-    <div ng-if="loggedIn && languages">
-        <div class="col-md-12">
-            <div class="panel panel-info" ng-repeat="language in languages">
-                <div class="panel-heading">
-                    <h4>{{language}}</h4>
-                </div>
-                <div class="panel-body">
-                    <p ng-repeat="sentence in sentences[language]">
-                        {{sentence.likes - sentence.dislikes}}
-                        <a class="btn btn-default"> <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                        <a class="btn btn-default"><i class="fa fa-thumbs-o-down"
-                                                      aria-hidden="true"></i></a>
-                        <a ng-href="#/sentences/{{sentence.id}}">{{sentence.text}}</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div ng-include="'pages/search-results.html'" ng-if="searchResultLanguages.length"></div>
 </div>

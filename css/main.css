@@ -3,36 +3,36 @@ html {
 }
 
 body {
+    min-height: 100%;
     padding-top: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+}
+
+* {
+    border-radius: 0px !important;
+}
+
+.search-results a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.log-out-button {
+    margin: 6px 0;
+}
+
+.row.flat {
+    margin: 0;
 }
 
 .home-page {
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    padding-top: 50px;
-    align-items: center;
 }
 
 .sentence-container {
-    display: flex;
-    flex: 1 1;
-    flex-direction: column;
 }
 
-center {
-    display: flex;
-    flex: 1 1;
-}
-
-[ng-view] {
-    flex: 1 1;
-    display: flex;
-    flex-direction: column;
+.app-container {
     background-color: #eee;
+    padding: 32px 32px 64px 32px;
 }
 
 .users-name-in-top-nav-bar {
@@ -42,22 +42,21 @@ center {
 }
 
 .header-container {
-    display: flex;
-    justify-content: space-between;
     padding: 0;
 }
 
 .welcome-message {
     padding-bottom: 8px;
+    text-align: center;
+    font-size: 42px;
 }
 
 .header-bar {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
     border-color: #080808;
     background-image: linear-gradient(to bottom, #3c3c3c 0, #222 100%);
     padding: 0 16px;
+    height: 50px;
 }
 
 .navbar-brand {
@@ -75,18 +74,30 @@ a.navbar-brand:focus {
 
 .user-name-and-log-out-button-container {
     display: flex;
-    align-self: center;
+    height: 100%;
 }
 
 .login-form-logout-container {
-    display: flex;
+    height: 100%;
 }
 
 .search-bar-button-container {
-    display: flex;
-    flex: 1 1 100%
+    padding-bottom: 12px;
 }
 
-.panel-body {
+.language-in-search-result {
+    text-transform: capitalize;
+    font-size: 26px;
+}
 
+.sentence-in-search-result .sentence-text{
+    font-size: 24px;
+}
+
+.search-results:not(:last-of-type) {
+    padding-bottom: 16px;
+}
+
+.search-results .panel {
+    margin-bottom: 0;
 }

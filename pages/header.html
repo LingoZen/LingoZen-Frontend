@@ -1,8 +1,10 @@
-<header class="header-bar">
-    <div class="logo-container">
-        <a class="navbar-brand" href="#/">Ling&#x262f;Zen</a>
-    </div>
-    <div class="login-form-logout-container">
+<header class="header-bar container-fluid">
+    <a class="navbar-brand" href="#/">
+        <span class="logo-container">
+            Ling&#x262f;Zen
+        </span>
+    </a>
+    <div class="login-form-logout-container pull-right">
         <form class="navbar-form navbar-right" role="form" ng-if="!loggedIn">
             <div class="form-group">
                 <input type="text" placeholder="Email" class="form-control" ng-model="login.username">
@@ -14,7 +16,7 @@
         </form>
         <div class="user-name-and-log-out-button-container">
             <a class="users-name-in-top-nav-bar" ng-if="loggedIn" ng-href="#/user-profile">{{user.username}} </a>
-            <button class="btn btn-success" ng-click="logOut()" ng-if="loggedIn">Log out</button>
+            <button class="btn btn-success log-out-button" ng-click="logOut()" ng-if="loggedIn">Log out</button>
         </div>
     </div>
 </header>

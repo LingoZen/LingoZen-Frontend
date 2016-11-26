@@ -1,0 +1,15 @@
+<div ng-repeat="language in searchResultLanguages" class="search-results">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <span class="language-in-search-result">{{language}}</span>
+        </div>
+    </div>
+    <a ng-href="#/sentences/{{sentence.id}}" ng-repeat="sentence in searchResultSentences[language]">
+        <div class="panel panel-info panel-body sentence-in-search-result">
+            <span class="col-xs-12 sentence-text">{{sentence.text}}</span>
+            <span class="col-xs-1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;{{sentence.likes - sentence.dislikes}}</span>
+            <span class="col-xs-1"><i class="fa fa-language" aria-hidden="true"></i>&nbsp;3</span>
+            <span class="col-xs-1"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp;8</span>
+        </div>
+    </a>
+</div>
