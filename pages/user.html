@@ -2,24 +2,30 @@
     <div class="panel panel-info">
         <div class="panel-body">
             <div class="col-md-6">
-                <h3 class="dark-grey">Registration</h3>
+                <h3 class="dark-grey">Update</h3>
 
                 <div class="form-group col-lg-12">
                     <label>Username</label>
-                    <input type="text" class="form-control" id="username" ng-model="something.username">
+                    <input type="text" class="form-control" id="username" ng-model="user.username">
+                </div>
+
+                <div class="form-group col-lg-12">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" id="name" ng-model="user.name">
                 </div>
 
                 <div class="form-group col-lg-6">
                     <label>Password</label>
-                    <input type="password" class="form-control" ng-model="something.password">
+                    <input type="password" class="form-control" ng-model="user.password"
+                    ng-init="user.password = ''">
                 </div>
 
                 <div class="form-group col-lg-6">
                     <label>Email Address</label>
-                    <input class="form-control" ng-model="something.email">
+                    <input class="form-control" ng-model="user.email">
                 </div>
 
-                <button type="submit" class="btn btn-primary" ng-click="signup()">Update</button>
+                <button type="submit" class="btn btn-primary" ng-click="update()">Update</button>
             </div>
         </div>
     </div>

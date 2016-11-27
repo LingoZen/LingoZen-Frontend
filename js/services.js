@@ -59,3 +59,16 @@ angular.module('lingoApp')
             return resources.register(user).$promise;
         };
     })
+
+    .service('userService', function ($resource, constants) {
+        var resources = $resource("", [], {
+            updateMyUser: {
+                method: 'PUT',
+                url: constants.backendApiUrl + 'users/me'
+            }
+        }, {});
+
+        this.updateMyUser = function (user) {
+            return resources.updateMyUser(user).$promise;
+        };
+    })

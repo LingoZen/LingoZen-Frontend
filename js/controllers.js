@@ -114,7 +114,19 @@ angular.module('lingoApp')
         }
     })
 
-    .controller('userProfileCtrl', function ($scope) {
+    .controller('userProfileCtrl', function ($rootScope, $scope, userService) {
+        $scope.update = function () {
+            if ($rootScope.user.password &&
+                ($rootScope.user.password === '' || $rootScope.user.password.indexOf('$2a$10$') === -1)) {
+                delete $rootScope.user.password;
+            }
+
+            userService.updateMyUser($rootScope.user).then(function (updatedUser) {
+                console.log('updated User is', updatedUser);
+            }).catch(function (err) {
+                console.error(err);
+            })
+        }
     })
 
     .controller('mainController', function ($rootScope, $scope, $location, jwtHelper, loginService, constants) {
