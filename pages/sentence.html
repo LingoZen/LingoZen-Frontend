@@ -1,44 +1,67 @@
-<div class="sentence-container container">
-    <div class="panel panel-info col-xs-12">
-        <div class="panel-body">
-            <span class="col-xs-12"> {{sentence.text}}</span>
-            <div class="sentence-actions col-lg-12">
-                <!--<a class="sentence-action col-lg-2" ng-click="likeSentence()">Like</a>-->
-                <!--<a class="sentence-action col-lg-2" ng-click="dislikeSentence()">Dislike</a>-->
-                <a class="sentence-action col-lg-2" ng-click="addTranslationToSentence()">Translate</a>
-                <a class="sentence-action col-lg-2" ng-click="addCommentToSentence()">Comment</a>
-                <!--<a class="sentence-action col-lg-2" ng-click="addSentenceToDeck()">Add to Deck</a>-->
-                <!--<a class="sentence-action col-lg-2" ng-click="flagSentence()">Flag</a>-->
-
+<div class="sentence-page">
+    <div class="original-sentence-and-comment-container panel panel-info">
+        <div class="original-sentence-container">
+            <span>{{sentence.text}}</span>
+        </div>
+        <div class="created-by-user-container">
+            Created by {{sentence.idUser}} on {{sentence.addedDate}}
+        </div>
+        <div class="original-sentence-actions-container">
+            <span>Like ({{sentence.likes}})</span>
+            <span>Dislikes ({{sentence.dislikes}})</span>
+            <span ng-click="addTranslationToSentence(sentence.id)">Translate ({{sentence.translations.length}})</span>
+            <span ng-click="addCommentToSentence(sentence.id)">Comments({{sentence.comments.length}})</span>
+        </div>
+        <div class="comments-section">
+            <span ng-if="!sentence.comments.length">There are no comments</span>
+            <div class="comment-container" ng-repeat="comment in sentence.comments">
+                <div class="comment-user-profile-picture">
+                    <div ng-include="'pages/profile-pic-img.html'" ng-if="searchResultLanguages.length"></div>
+                </div>
+                <div class="users-name-comment-and-action-container">
+                    <span>{{comment.idUser}}</span>
+                    <span>{{comment.description}}</span>
+                    <div class="comment-actions">
+                        <span>Like ({{comment.likes}})</span>
+                        <span>Dislikes ({{comment.dislikes}})</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <span class="col-xs-12" style="padding-top: 24px;">Translations</span>
-    <div class="panel panel-info col-xs-12" ng-repeat="translation in sentence.translations">
-        <div class="panel-body">
-            {{translation.likes - translation.dislikes}}
-            <a class="btn btn-default">
-                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-            </a>
-            <a class="btn btn-default">
-                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-            </a>
-            {{translation.text}}
+    <div class="translation-sentences-container">
+        <span class="translation-header">Translations</span>
+        <div class="panel panel-info">
+            <span class="col-xs-12" ng-if="!sentence.translations.length">No Translations found</span>
+            <div ng-repeat="translation in sentence.translations">
+                <div class="original-sentence-container">
+                    <span>{{translation.text}}</span>
+                </div>
+                <div class="created-by-user-container">
+                    Created by {{translation.idUser}} on {{translation.addedDate}}
+                </div>
+                <div class="original-sentence-actions-container">
+                    <span>Like ({{translation.likes}})</span>
+                    <span>Dislikes ({{translation.dislikes}})</span>
+                    <span ng-click="addCommentToSentence(translation.id)">Comments({{translation.comments.length}})</span>
+                </div>
+                <div class="comments-section">
+                    <div class="comment-container" ng-repeat="comment in translation.comments">
+                        <div class="comment-user-profile-picture">
+                            <div ng-include="'pages/profile-pic-img.html'" ng-if="searchResultLanguages.length"></div>
+                        </div>
+                        <div class="users-name-comment-and-action-container">
+                            <span>{{comment.idUser}}</span>
+                            <span>{{comment.description}}</span>
+                            <div class="comment-actions">
+                                <span>Like ({{comment.likes}})</span>
+                                <span>Dislikes ({{comment.dislikes}})</span>
+                            </div>
+                        </div>
+                    </div>
+                    <span ng-if="!sentence.comments.length">There are no comments</span>
+                </div>
+            </div>
         </div>
     </div>
-    <span class="col-xs-12" ng-if="!sentence.translations.length">No Translations found for this</span>
-    <span class="col-xs-12" style="padding-top: 24px;">Comments</span>
-    <div class="panel panel-info col-xs-12" ng-repeat="comment in sentence.comments">
-        <div class="panel-body">
-            {{comment.likes - comment.dislikes}}
-            <a class="btn btn-default">
-                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-            </a>
-            <a class="btn btn-default">
-                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-            </a>
-            {{comment.description}}
-        </div>
-    </div>
-    <span ng-if="!sentence.comments.length" class="col-xs-12">No Comments found for this</span>
 </div>

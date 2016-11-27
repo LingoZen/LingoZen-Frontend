@@ -11,10 +11,12 @@
         </uib-accordion-heading>
         <a ng-href="#/sentences/{{sentence.id}}" ng-repeat="sentence in searchResultSentences[language]">
             <div class="panel panel-info panel-body sentence-in-search-result">
-                <span class="col-xs-12 sentence-text">{{sentence.text}}</span>
-                <span class="col-xs-1"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;{{sentence.likes - sentence.dislikes}}</span>
-                <span class="col-xs-1"><i class="fa fa-language" aria-hidden="true"></i>&nbsp;3</span>
-                <span class="col-xs-1"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp;8</span>
+                <span class="sentence-text">{{sentence.text}}</span>
+                <div class="likes-comments-translation-numbers-container">
+                    <span class=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;{{sentence.likes - sentence.dislikes}}</span>
+                    <span class=""><i class="fa fa-language" aria-hidden="true"></i>&nbsp;3</span>
+                    <span class=""><i class="fa fa-comment" aria-hidden="true"></i>&nbsp;8</span>
+                </div>
             </div>
         </a>
     </div>

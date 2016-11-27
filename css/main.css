@@ -31,8 +31,19 @@ body {
 }
 
 .app-container {
-    background-color: #eee;
+    background-color: #EEEEEE;
     padding: 32px 32px 64px 32px;
+}
+
+.panel-default > .panel-heading {
+    color: #000000;
+    background-color: #9E9E9E;
+    border-color: #757575;
+}
+
+.panel-heading,
+.panel-body {
+    padding: 12px;
 }
 
 .users-name-in-top-nav-bar {
@@ -111,4 +122,68 @@ a.navbar-brand:focus {
 /*override*/
 .panel-group .panel + .panel {
     margin-top: 24px;
+}
+
+.original-sentence-and-comment-container {
+    background-color: #ffffff;
+}
+
+.original-sentence-container span {
+    font-size: 32px;
+}
+
+/*row direction*/
+.original-sentence-actions-container,
+.likes-comments-translation-numbers-container {
+    flex-direction: row;
+    display: flex;
+}
+
+/*column direction*/
+.original-sentence-and-comment-container,
+.users-name-comment-and-action-container {
+    flex-direction: column;
+    display: flex;
+}
+
+.likes-comments-translation-numbers-container > span:not(:last-child) {
+    padding-right: 8px;
+}
+
+.original-sentence-and-comment-container > div:not(.comments-section),
+.comments-section > div {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.original-sentence-container {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.created-by-user-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.original-sentence-actions-container {
+    background-color: #9E9E9E;
+}
+
+.comment-container:nth-of-type(odd) {
+    background-color: #B0BEC5;
+}
+
+.comment-container:nth-of-type(even) {
+    background-color: #607D8B;
+}
+
+.original-sentence-actions-container > span:not(:last-child),
+.comment-actions > span:not(:last-child) {
+    padding-right: 12px;
+}
+
+.translation-header{
+    font-size: 32px;
+    font-weight: 500;
 }

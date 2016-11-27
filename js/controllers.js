@@ -30,21 +30,53 @@ angular.module('lingoApp')
             console.error(err);
         });
 
-        $scope.addCommentToSentence = function () {
+        $scope.addCommentToSentence = function (sentenceId) {
             var modalInstance = $uibModal.open({
                 templateUrl: 'pages/modal-templates/add-comment-to-sentence.html',
                 controller: 'addCommentToSentenceModalController',
                 size: 'lg',
                 resolve: {
-                    sentence: function () {
-                        return $scope.sentence;
+                    sentenceId: function () {
+                        return sentenceId;
                     }
                 }
             });
 
-            modalInstance.result.then(function (comment) {
-                if (comment) {
-                    $scope.sentence.comments.push(comment);
+            modalInstance.result.then(function (resolved) {
+                if (resolved && resolved.comment) {
+                    if ($scope.sentence.id === sentenceId) {
+                        return $scope.sentence.comments.push(resolved.comment);
+                    }
+
+                    $scope.sentence.translations.forEach(function (translation, index) {
+                        if (translation.id === sentenceId) {
+                            $scope.sentence.translations[index].comments.push(resolved.comment);
+                        }
+                    })
+                }
+            }).catch(function (err) {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        };
+
+        $scope.addTranslationToSentence = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'pages/modal-templates/add-translation-to-sentence.html',
+                controller: 'addTranslationToSentenceModalController',
+                size: 'lg',
+                resolve: {
+                    sentenceId: function () {
+                        return $scope.sentence.id;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (resolved) {
+                if (resolved && resolved.translation) {
+                    return $scope.sentence.translations.push(resolved.translation);
+
                 }
             }).catch(function (err) {
                 if (err) {
@@ -145,7 +177,7 @@ angular.module('lingoApp')
         }
     })
 
-    .controller('addCommentToSentenceModalController', function ($scope, $uibModalInstance, sentence, sentenceService) {
+    .controller('addCommentToSentenceModalController', function ($scope, $uibModalInstance, sentenceId, sentenceService) {
         $scope.comment = {};
 
         $scope.cancel = function () {
@@ -153,8 +185,25 @@ angular.module('lingoApp')
         };
 
         $scope.ok = function () {
-            sentenceService.addCommentToSentence(sentence.id, $scope.comment).then(function (comment) {
+            sentenceService.addCommentToSentence(sentenceId, $scope.comment).then(function (comment) {
                 $uibModalInstance.close({comment: comment});
+            }).catch(function (err) {
+                console.error(err);
+            });
+        };
+
+    })
+
+    .controller('addTranslationToSentenceModalController', function ($scope, $uibModalInstance, sentenceId, sentenceService) {
+        $scope.translation = {};
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+        };
+
+        $scope.ok = function () {
+            sentenceService.addTranslationToSentence(sentenceId, $scope.translation).then(function (translation) {
+                $uibModalInstance.close({translation: translation});
             }).catch(function (err) {
                 console.error(err);
             });

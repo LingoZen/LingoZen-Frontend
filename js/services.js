@@ -12,6 +12,10 @@ angular.module('lingoApp')
             addCommentToSentence: {
                 method: 'POST',
                 url: constants.backendApiUrl + 'comments/sentences/:id'
+            },
+            addTranslationToSentence: {
+                method: 'POST',
+                url: constants.backendApiUrl + 'sentences/:id/translations'
             }
         }, {});
 
@@ -23,9 +27,13 @@ angular.module('lingoApp')
             return resources.getById({id: id}).$promise;
         };
 
-        this.addCommentToSentence = function (sentenceId, comment){
+        this.addCommentToSentence = function (sentenceId, comment) {
             return resources.addCommentToSentence({id: sentenceId}, comment).$promise;
-        }
+        };
+
+        this.addTranslationToSentence = function (sentenceId, translation) {
+            return resources.addTranslationToSentence({id: sentenceId}, translation).$promise;
+        };
     })
 
     .service('loginService', function ($resource, constants) {
