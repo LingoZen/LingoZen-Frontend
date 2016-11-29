@@ -72,3 +72,30 @@ angular.module('lingoApp')
             return resources.updateMyUser(user).$promise;
         };
     })
+
+    .service('languageService', function ($resource, $cacheFactory, $q, constants) {
+        var resources = $resource("", [], {
+            getLanguages: {
+                method: 'GET',
+                url: constants.backendApiUrl + 'languages',
+                isArray: true
+            }
+        }, {});
+        var languageCache = $cacheFactory('language');
+
+        this.getLanguages = function (user) {
+            return $q(function (resolve, reject) {
+                var cachedLanguages = languageCache.get('languages');
+                if (cachedLanguages) {
+                    return resolve(cachedLanguages);
+                }
+
+                resources.getLanguages(user).$promise.then(function (languages) {
+                    languageCache.put('languages', languages);
+                    return resolve(languages);
+                }).catch(function (err) {
+                    return reject(err);
+                })
+            });
+        };
+    })

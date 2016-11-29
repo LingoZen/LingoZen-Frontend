@@ -183,7 +183,11 @@ a.navbar-brand:focus {
     padding-right: 12px;
 }
 
-.translation-header{
+.translation-header {
     font-size: 32px;
     font-weight: 500;
+}
+
+.translation-card:not(:first-of-type) {
+    padding-top: 12px;
 }

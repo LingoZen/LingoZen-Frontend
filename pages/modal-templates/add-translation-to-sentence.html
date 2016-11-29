@@ -3,7 +3,10 @@
 </div>
 
 <div class="modal-body" id="modal-body">
-    <input type="text" ng-model="translation.text"/>
+    <select ng-model="translation.language" ng-init="translation.language = languages[0].englishName">
+        <option ng-repeat="language in languages" value="{{language.englishName}}">{{language.name}}</option>
+    </select>
+    <input style="width:100%" type="text" ng-model="translation.text"/>
 </div>
 
 <div class="modal-footer">

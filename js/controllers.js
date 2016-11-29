@@ -117,7 +117,7 @@ angular.module('lingoApp')
     .controller('userProfileCtrl', function ($rootScope, $scope, userService) {
         $scope.update = function () {
             if ($rootScope.user.password &&
-                ($rootScope.user.password === '' || $rootScope.user.password.indexOf('$2a$10$') === -1)) {
+                ($rootScope.user.password === '' || $rootScope.user.password.indexOf('$2a$10$') >= -1)) {
                 delete $rootScope.user.password;
             }
 
@@ -203,11 +203,15 @@ angular.module('lingoApp')
                 console.error(err);
             });
         };
-
     })
 
-    .controller('addTranslationToSentenceModalController', function ($scope, $uibModalInstance, sentenceId, sentenceService) {
+    .controller('addTranslationToSentenceModalController', function ($scope, $uibModalInstance, sentenceId, sentenceService, languageService) {
         $scope.translation = {};
+        $scope.languages = [];
+
+        languageService.getLanguages().then(function (languages) {
+            $scope.languages = languages;
+        });
 
         $scope.cancel = function () {
             $uibModalInstance.dismiss();
@@ -220,5 +224,4 @@ angular.module('lingoApp')
                 console.error(err);
             });
         };
-
     })

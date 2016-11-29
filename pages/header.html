@@ -13,6 +13,9 @@
                 <input type="password" placeholder="Password" class="form-control" ng-model="login.password">
             </div>
             <button type="submit" class="btn btn-success" ng-click="signIn()">Sign in</button>
+            <a href="#/signup">
+                <button class="btn btn-primary">Sign up</button>
+            </a>
         </form>
         <div class="user-name-and-log-out-button-container">
             <a class="users-name-in-top-nav-bar" ng-if="loggedIn" ng-href="#/user-profile">{{user.username}}</a>
