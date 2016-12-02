@@ -16,6 +16,10 @@ angular.module('lingoApp')
             addTranslationToSentence: {
                 method: 'POST',
                 url: constants.backendApiUrl + 'sentences/:id/translations'
+            },
+            addSentence: {
+                method: 'POST',
+                url: constants.backendApiUrl + 'sentences'
             }
         }, {});
 
@@ -33,6 +37,10 @@ angular.module('lingoApp')
 
         this.addTranslationToSentence = function (sentenceId, translation) {
             return resources.addTranslationToSentence({id: sentenceId}, translation).$promise;
+        };
+
+        this.addSentence = function (sentence) {
+            return resources.addSentence(sentence).$promise;
         };
     })
 

@@ -86,7 +86,7 @@ angular.module('lingoApp')
         };
     })
 
-    .controller('homeCtrl', function ($scope, sentenceService) {
+    .controller('homeCtrl', function ($scope, $uibModal, $location, sentenceService) {
         $scope.searchQuery = {};
         $scope.searchResultLanguages = [];
         $scope.searchResultSentences = {};
@@ -98,6 +98,25 @@ angular.module('lingoApp')
                 $scope.lastSearchedQuery = $scope.searchQuery.query;
             }
         });
+
+        $scope.addSentence = function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'pages/modal-templates/add-sentence.html',
+                controller: 'addModalController',
+                size: 'lg',
+                resolve: {}
+            });
+
+            modalInstance.result.then(function (resolved) {
+                if (resolved && resolved.sentence) {
+                    $location.url('/sentences/' + resolved.sentence.id);
+                }
+            }).catch(function (err) {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        };
 
         function search(searchQuery) {
             sentenceService.searchSentences($scope.searchQuery.query).then(function (res) {
@@ -225,3 +244,24 @@ angular.module('lingoApp')
             });
         };
     })
+
+    .controller('addModalController', function ($scope, $uibModalInstance, sentenceService, languageService) {
+        $scope.sentence = {};
+        $scope.languages = [];
+
+        languageService.getLanguages().then(function (languages) {
+            $scope.languages = languages;
+        });
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss();
+        };
+
+        $scope.ok = function () {
+            sentenceService.addSentence($scope.sentence).then(function (sentence) {
+                $uibModalInstance.close({sentence: sentence});
+            }).catch(function (err) {
+                console.error(err);
+            });
+        };
+    });

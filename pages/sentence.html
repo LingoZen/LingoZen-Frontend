@@ -7,8 +7,8 @@
             Created by {{sentence.idUser}} on {{sentence.addedDate}}
         </div>
         <div class="original-sentence-actions-container">
-            <span>Like ({{sentence.likes || 0}})</span>
-            <span>Dislikes ({{sentence.dislikes || 0}})</span>
+            <!--<span>Like ({{sentence.likes || 0}})</span>-->
+            <!--<span>Dislikes ({{sentence.dislikes || 0}})</span>-->
             <span ng-click="addTranslationToSentence(sentence.id)">Translate ({{sentence.translations.length}})</span>
             <span ng-click="addCommentToSentence(sentence.id)">Comments({{sentence.comments.length}})</span>
         </div>
@@ -22,8 +22,8 @@
                     <span>{{comment.idUser}}</span>
                     <span>{{comment.description}}</span>
                     <div class="comment-actions">
-                        <span>Like ({{comment.likes || 0}})</span>
-                        <span>Dislikes ({{comment.dislikes || 0}})</span>
+                        <!--<span>Like ({{comment.likes || 0}})</span>-->
+                        <!--<span>Dislikes ({{comment.dislikes || 0}})</span>-->
                     </div>
                 </div>
             </div>
@@ -40,8 +40,8 @@
                 Created by {{translation.idUser}} on {{translation.addedDate}}
             </div>
             <div class="original-sentence-actions-container">
-                <span>Like ({{translation.likes || 0}})</span>
-                <span>Dislikes ({{translation.dislikes || 0}})</span>
+                <!--<span>Like ({{translation.likes || 0}})</span>-->
+                <!--<span>Dislikes ({{translation.dislikes || 0}})</span>-->
                 <span ng-click="addCommentToSentence(translation.id)">Comments({{translation.comments.length}})</span>
             </div>
             <div class="comments-section">
@@ -53,8 +53,8 @@
                         <span>{{comment.idUser}}</span>
                         <span>{{comment.description}}</span>
                         <div class="comment-actions">
-                            <span>Like ({{comment.likes || 0}})</span>
-                            <span>Dislikes ({{comment.dislikes || 0}})</span>
+                            <!--<span>Like ({{comment.likes || 0}})</span>-->
+                            <!--<span>Dislikes ({{comment.dislikes || 0}})</span>-->
                         </div>
                     </div>
                 </div>

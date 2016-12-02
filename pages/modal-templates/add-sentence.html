@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Add a Sentence</h3>
+</div>
+
+<div class="modal-body" id="modal-body">
+    <select ng-model="sentence.language" ng-init="sentence.language = languages[0].englishName">
+        <option ng-repeat="language in languages" value="{{language.englishName}}">{{language.name}}</option>
+    </select>
+    <input style="width:100%" type="text" ng-model="sentence.text"/>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+</div>
