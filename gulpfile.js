@@ -1,36 +1,36 @@
 var gulp = require('gulp');
-var awspublish = require('gulp-awspublish');
 var inlinesource = require('gulp-inline-source');
+var minifyHtml = require('gulp-minify-html');
+var ngTemplate = require('gulp-ng-template-html');
+var uglify = require('gulp-uglify');
+var runSequence = require('run-sequence');
+var fileinclude = require('gulp-file-include');
+var rename = require("gulp-rename");
 
-var localConfig = {
-    buildSrc: './build/**/*',
-    getAwsConf: function (environment) {
-        var conf = require('./awsConfig.js');
-        if (!conf[environment]) {
-            throw 'No aws conf for env: ' + environment;
-        }
-
-        if (!conf[environment + 'Headers']) {
-            throw 'No aws headers for env: ' + environment;
-        }
-
-        return {keys: conf[environment], headers: conf[environment + 'Headers']};
-    }
-};
 
 gulp.task('inlinesource', function () {
-    return gulp.src('./src/*.html')
-        .pipe(inlinesource())
+    return gulp.src('./src/index.html')
+        .pipe(inlinesource({
+            compress: false
+        }))
         .pipe(gulp.dest('./out'));
 });
 
-gulp.task('s3:production', ['build:production'], function () {
-    var awsConf = localConfig.getAwsConf('production');
-    var publisher = awspublish.create(awsConf.keys);
-    return gulp.src(localConfig.buildSrc)
-        .pipe(awspublish.gzip({ext: ''}))
-        .pipe(publisher.publish(awsConf.headers))
-        .pipe(publisher.cache())
-        .pipe(publisher.sync())
-        .pipe(awspublish.reporter());
+gulp.task('templates', function () {
+    gulp.src('./src/pages/**/*.html')
+    // .pipe(minifyHtml({empty: true, quotes: true}))
+        .pipe(ngTemplate({
+            moduleName: 'lingoApp'
+        }))
+        .pipe(gulp.dest('src/js/templates'));  // output file: 'dist/js/templates.js'&'dist/js/templates.html'
+});
+
+gulp.task('fileinclude', function () {
+    gulp.src(['./src/original-index.html'])
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '@file'
+        }))
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest('./src'));
 });

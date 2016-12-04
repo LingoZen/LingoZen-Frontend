@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-csp.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css" inline>
 </head>
 
 <body ng-app="lingoApp" ng-controller="mainController">
@@ -19,9 +19,9 @@
 </p>
 <![endif]-->
 
-<div ng-include="'pages/header.html'"></div>
+<div ng-include="'header.html'"></div>
 <div ng-view="" class="container-fluid app-container"></div>
-<div ng-include="'pages/footer.html'"></div>
+<div ng-include="'footer.html'"></div>
 
 <!--libs-->
 <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
@@ -48,6 +48,9 @@
 <script src="js/services.js" inline></script>
 <script src="js/controllers.js" inline></script>
 <script src="js/routes.js" inline></script>
+<!--<script src="js/templates/templates.js" inline></script>-->
+
+@@include('js/templates/templates.html')
 
 </body>
 </html>

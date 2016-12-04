@@ -1,5 +1,5 @@
 angular.module('lingoApp')
-    .service('sentenceService', function ($resource, constants) {
+    .service('sentenceService', ['$resource', 'constants', function ($resource, constants) {
         var resources = $resource("", [], {
             getById: {
                 method: 'GET',
@@ -42,9 +42,9 @@ angular.module('lingoApp')
         this.addSentence = function (sentence) {
             return resources.addSentence(sentence).$promise;
         };
-    })
+    }])
 
-    .service('loginService', function ($resource, constants) {
+    .service('loginService', ['$resource', 'constants', function ($resource, constants) {
         var resources = $resource("", [], {
             login: {
                 method: 'POST',
@@ -66,9 +66,9 @@ angular.module('lingoApp')
         this.register = function (user) {
             return resources.register(user).$promise;
         };
-    })
+    }])
 
-    .service('userService', function ($resource, constants) {
+    .service('userService', ['$resource', 'constants', function ($resource, constants) {
         var resources = $resource("", [], {
             updateMyUser: {
                 method: 'PUT',
@@ -79,9 +79,9 @@ angular.module('lingoApp')
         this.updateMyUser = function (user) {
             return resources.updateMyUser(user).$promise;
         };
-    })
+    }])
 
-    .service('languageService', function ($resource, $cacheFactory, $q, constants) {
+    .service('languageService', ['$resource', 'constants', '$cacheFactory', '$q', function ($resource, constants, $cacheFactory, $q) {
         var resources = $resource("", [], {
             getLanguages: {
                 method: 'GET',
@@ -106,4 +106,4 @@ angular.module('lingoApp')
                 })
             });
         };
-    })
+    }])

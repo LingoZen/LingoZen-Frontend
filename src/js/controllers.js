@@ -1,5 +1,5 @@
 angular.module('lingoApp')
-    .controller('signupCtrl', function ($scope, $rootScope, loginService, $location, constants) {
+    .controller('signupCtrl', ['$scope', '$rootScope', 'loginService', '$location', 'constants', function ($scope, $rootScope, loginService, $location, constants) {
         $scope.something = {};
 
         $scope.signup = function () {
@@ -19,9 +19,9 @@ angular.module('lingoApp')
         function setJwtInLocalStorage(jwt) {
             localStorage.setItem(constants.jwtId, jwt);
         }
-    })
+    }])
 
-    .controller('sentenceCtrl', function ($scope, $routeParams, $uibModal, sentenceService) {
+    .controller('sentenceCtrl', ['$scope', '$routeParams', '$uibModal', 'sentenceService', function ($scope, $routeParams, $uibModal, sentenceService) {
         $scope.sentence = {};
 
         sentenceService.getById($routeParams.id).then(function (sentence) {
@@ -32,7 +32,7 @@ angular.module('lingoApp')
 
         $scope.addCommentToSentence = function (sentenceId) {
             var modalInstance = $uibModal.open({
-                templateUrl: 'pages/modal-templates/add-comment-to-sentence.html',
+                templateUrl: 'modal-templates/add-comment-to-sentence.html',
                 controller: 'addCommentToSentenceModalController',
                 size: 'lg',
                 resolve: {
@@ -63,7 +63,7 @@ angular.module('lingoApp')
 
         $scope.addTranslationToSentence = function () {
             var modalInstance = $uibModal.open({
-                templateUrl: 'pages/modal-templates/add-translation-to-sentence.html',
+                templateUrl: 'modal-templates/add-translation-to-sentence.html',
                 controller: 'addTranslationToSentenceModalController',
                 size: 'lg',
                 resolve: {
@@ -84,9 +84,9 @@ angular.module('lingoApp')
                 }
             });
         };
-    })
+    }])
 
-    .controller('homeCtrl', function ($scope, $uibModal, $location, sentenceService) {
+    .controller('homeCtrl', ['$scope', '$uibModal', '$location', 'sentenceService', function ($scope, $uibModal, $location, sentenceService) {
         $scope.searchQuery = {};
         $scope.searchResultLanguages = [];
         $scope.searchResultSentences = {};
@@ -101,7 +101,7 @@ angular.module('lingoApp')
 
         $scope.addSentence = function () {
             var modalInstance = $uibModal.open({
-                templateUrl: 'pages/modal-templates/add-sentence.html',
+                templateUrl: 'modal-templates/add-sentence.html',
                 controller: 'addModalController',
                 size: 'lg',
                 resolve: {}
@@ -131,9 +131,9 @@ angular.module('lingoApp')
                 console.error(err);
             });
         }
-    })
+    }])
 
-    .controller('userProfileCtrl', function ($rootScope, $scope, userService) {
+    .controller('userProfileCtrl', ['$rootScope', '$scope', 'userService', function ($rootScope, $scope, userService) {
         $scope.update = function () {
             if ($rootScope.user.password &&
                 ($rootScope.user.password === '' || $rootScope.user.password.indexOf('$2a$10$') >= -1)) {
@@ -146,9 +146,9 @@ angular.module('lingoApp')
                 console.error(err);
             })
         }
-    })
+    }])
 
-    .controller('mainController', function ($rootScope, $scope, $location, jwtHelper, loginService, constants) {
+    .controller('mainController', ['$rootScope', '$scope', '$location', 'jwtHelper', 'loginService', 'constants', function ($rootScope, $scope, $location, jwtHelper, loginService, constants) {
         $scope.goTo = function (url) {
             $location.url(url);
         };
@@ -206,9 +206,9 @@ angular.module('lingoApp')
             $rootScope.user = null;
             localStorage.removeItem(constants.jwtId);
         }
-    })
+    }])
 
-    .controller('addCommentToSentenceModalController', function ($scope, $uibModalInstance, sentenceId, sentenceService) {
+    .controller('addCommentToSentenceModalController', ['$scope', '$uibModalInstance', 'sentenceId', 'sentenceService', function ($scope, $uibModalInstance, sentenceId, sentenceService) {
         $scope.comment = {};
 
         $scope.cancel = function () {
@@ -222,9 +222,9 @@ angular.module('lingoApp')
                 console.error(err);
             });
         };
-    })
+    }])
 
-    .controller('addTranslationToSentenceModalController', function ($scope, $uibModalInstance, sentenceId, sentenceService, languageService) {
+    .controller('addTranslationToSentenceModalController', ['$scope', '$uibModalInstance', 'sentenceId', 'sentenceService', 'languageService', function ($scope, $uibModalInstance, sentenceId, sentenceService, languageService) {
         $scope.translation = {};
         $scope.languages = [];
 
@@ -243,9 +243,9 @@ angular.module('lingoApp')
                 console.error(err);
             });
         };
-    })
+    }])
 
-    .controller('addModalController', function ($scope, $uibModalInstance, sentenceService, languageService) {
+    .controller('addModalController', ['$scope', '$uibModalInstance', 'sentenceService', 'languageService', function ($scope, $uibModalInstance, sentenceService, languageService) {
         $scope.sentence = {};
         $scope.languages = [];
 
@@ -264,4 +264,4 @@ angular.module('lingoApp')
                 console.error(err);
             });
         };
-    });
+    }]);
