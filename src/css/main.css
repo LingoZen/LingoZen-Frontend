@@ -129,7 +129,7 @@ a.navbar-brand:focus {
 }
 
 .original-sentence-container span {
-    font-size: 32px;
+    font-size: 60px;
 }
 
 /*row direction*/
@@ -148,6 +148,20 @@ a.navbar-brand:focus {
 
 .likes-comments-translation-numbers-container > span:not(:last-child) {
     padding-right: 8px;
+}
+
+.original-sentence-and-comment-container > div:not(.comments-section),
+.comments-section > div,
+.there-are-no-comments,
+span.translation-language-container,
+span.sentence-language-container {
+    font-size: 24px;
+}
+
+.translation-language-container,
+.sentence-language-container {
+    align-self: flex-end;
+    text-transform: capitalize;
 }
 
 .original-sentence-and-comment-container > div:not(.comments-section),
@@ -190,4 +204,15 @@ a.navbar-brand:focus {
 
 .translation-card:not(:first-of-type) {
     padding-top: 12px;
+}
+
+@media screen and (max-width: 800px) {
+    .login-form-logout-container {
+        display: none;
+    }
+}
+
+.original-sentence-container {
+    display: flex;
+    flex-direction: column;
 }

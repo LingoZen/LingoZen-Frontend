@@ -1,7 +1,8 @@
 <div class="sentence-page">
     <div class="original-sentence-and-comment-container panel panel-info">
         <div class="original-sentence-container">
-            <span>{{sentence.text}}</span>
+            <span class="sentence-text-container">{{sentence.text}}</span>
+            <span class="sentence-language-container">{{sentence.language}}</span>
         </div>
         <!--<div class="created-by-user-container">-->
         <!--Created by {{sentence.idUser}} on {{sentence.addedDate}}-->
@@ -9,11 +10,13 @@
         <div class="original-sentence-actions-container">
             <!--<span>Like ({{sentence.likes || 0}})</span>-->
             <!--<span>Dislikes ({{sentence.dislikes || 0}})</span>-->
-            <span ng-click="addTranslationToSentence(sentence.id)">Translate ({{sentence.translations.length}})</span>
-            <span ng-click="addCommentToSentence(sentence.id)">Comments({{sentence.comments.length}})</span>
+            <span ng-if="loggedIn" ng-click="addTranslationToSentence(sentence.id)" class="there-are-no-comments">Translate ({{sentence.translations.length}})</span>
+            <span ng-if="loggedIn"
+                  ng-click="addCommentToSentence(sentence.id)" class="there-are-no-comments">Comments({{sentence.comments.length}})</span>
+            <span ng-if="!loggedIn">Please Log in to add comments and translations</span>
         </div>
         <div class="comments-section">
-            <span ng-if="!sentence.comments.length">There are no comments</span>
+            <span ng-if="!sentence.comments.length" class="there-are-no-comments">There are no comments</span>
             <div class="comment-container" ng-repeat="comment in sentence.comments">
                 <div class="users-name-comment-and-action-container">
                     <span>{{comment.idUser}}</span>
@@ -26,20 +29,22 @@
             </div>
         </div>
     </div>
+
     <div class="translation-sentences-container">
         <span class="translation-header">Translations</span>
-        <span class="col-xs-12" ng-if="!sentence.translations.length">No Translations found</span>
+        <span class="col-xs-12 there-are-no-comments" ng-if="!sentence.translations.length">No Translations found</span>
         <div ng-repeat="translation in sentence.translations" class="panel panel-infotranslation-card">
             <div class="original-sentence-container">
-                <span>{{translation.text}}</span>
+                <span class="translation-text-container">{{translation.text}}</span>
+                <span class="translation-language-container">{{translation.language}}</span>
             </div>
             <!--<div class="created-by-user-container">-->
-                <!--Created by {{translation.idUser}} on {{translation.addedDate}}-->
+            <!--Created by {{translation.idUser}} on {{translation.addedDate}}-->
             <!--</div>-->
             <div class="original-sentence-actions-container">
                 <!--<span>Like ({{translation.likes || 0}})</span>-->
                 <!--<span>Dislikes ({{translation.dislikes || 0}})</span>-->
-                <span ng-click="addCommentToSentence(translation.id)">Comments({{translation.comments.length}})</span>
+                <span ng-click="addCommentToSentence(translation.id)" class="there-are-no-comments">Comments({{translation.comments.length}})</span>
             </div>
             <div class="comments-section">
                 <div class="comment-container" ng-repeat="comment in translation.comments">
@@ -52,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <span ng-if="!sentence.comments.length">There are no comments</span>
+                <span ng-if="!sentence.comments.length" class="there-are-no-comments">There are no comments</span>
             </div>
         </div>
     </div>
